@@ -36,6 +36,16 @@ When a billing request is executed with a provider such as Paypal it creates a J
 
 A BillingRequest doesn't need to be online, it might be an e-mail or printed letter requesting the customer to pay.  In such a scenario the bank transfer should contain a reference to the billing request by means of an unique code.
 
+A plan should contain following billing relevant information:
+* name
+* version
+* amount
+* interval type (day, month, year)
+* interval amount ( 1-month, 2-months = bi-monthly, 1-year, ...)
+* occurences (how many times the BR should be executed, 0 means infinite)
+
+
+
 Monitoring billing
 
 A sales clerk usually wants to have an overview of
