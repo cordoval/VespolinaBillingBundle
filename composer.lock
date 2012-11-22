@@ -1,0 +1,48 @@
+{
+    "hash": "3058862575e5f04cabc87d49ec29db73",
+    "packages": [
+        {
+            "name": "vespolina/core",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/iampersistent/VespolinaCore.git",
+                "reference": "master"
+            },
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Vespolina": "lib/"
+                }
+            },
+            "time": "1353306240"
+        },
+        {
+            "name": "vespolina/product",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "git://github.com/iampersistent/VespolinaProduct.git",
+                "reference": "master"
+            },
+            "type": "library",
+            "installation-source": "source",
+            "autoload": {
+                "psr-0": {
+                    "Vespolina": "lib/"
+                }
+            },
+            "time": "1350975540"
+        }
+    ],
+    "packages-dev": null,
+    "aliases": [
+
+    ],
+    "minimum-stability": "stable",
+    "stability-flags": {
+        "vespolina/core": 20,
+        "vespolina/product": 20
+    }
+}

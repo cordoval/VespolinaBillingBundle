@@ -1,0 +1,76 @@
+{
+    "name": "vespolina/billing-bundle",
+    "type": "symfony-bundle",
+    "description": "Vespolina billing bundle. Billing management and more.",
+    "keywords": ["shop", "ecommerce", "product", "billing", "payments"],
+    "homepage": "http://vespolina-project.org",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Vespolina Community",
+            "homepage": "https://github.com/vespolina/VespolinaBillingBundle/contributors"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2",
+        "vespolina/core": "dev-master",
+        "vespolina/product": "dev-master"
+    },
+    "suggest": {
+        "symfony/doctrine-bundle": "*",
+        "symfony/mongodb-odm-bundle": "*",
+        "doctrine/couchdb-odm-bundle": "*"
+    },
+    "repositories":[
+        {
+            "type": "package",
+            "package":{
+                "version": "dev-master",
+                "name": "vespolina/core",
+                "source":{
+                    "url": "git://github.com/iampersistent/VespolinaCore.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "psr-0": { "Vespolina": "lib/" }
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package":{
+                "version": "dev-master",
+                "name": "vespolina/product",
+                "source":{
+                    "url": "git://github.com/iampersistent/VespolinaProduct.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "psr-0": { "Vespolina": "lib/" }
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package":{
+                "version": "dev-master",
+                "name": "vespolina/taxonomy",
+                "source":{
+                    "url": "git://github.com/iampersistent/VespolinaTaxonomy.git",
+                    "type": "git",
+                    "reference": "master"
+                },
+                "autoload": {
+                    "psr-0": { "Vespolina": "lib/" }
+                }
+            }
+        }
+    ],
+    "autoload": {
+        "psr-0": { "Vespolina\\BillingBundle": "" }
+    },
+    "target-dir": "Vespolina/BillingBundle"
+}
+
