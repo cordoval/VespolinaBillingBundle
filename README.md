@@ -34,15 +34,22 @@ The BillingRequest contains all information needed to fulfill the billing such a
 When a billing request is executed with a provider such as Paypal it creates a JMS payment instruction and tries to execute it wit Paypal.  If it succees the status of the BillingRequest is updated.  When the payment does not succeeds a new payment instruction should be created to reprocess the billing.
 
 
-A BillingRequest doesn't need to be online, it might be an e-mail or printed letter requesting the customer to pay.
+A BillingRequest doesn't need to be online, it might be an e-mail or printed letter requesting the customer to pay.  In such a scenario the bank transfer should contain a reference to the billing request by means of an unique code.
 
 Monitoring billing
 
 A sales clerk usually wants to have an overview of
 * billing requests having an error
+* offline billing requests 
 * the total amount still pending to be billed
 * the total amount overdue
 
+Other functionalities this bundle should have
+* Provide means to process bank statement to match open billing requests
+* Allow the customer to resume a failed payment by sending him an email containing a link to perform online billing.
+* Cope with customers paying multiple billing requests at once (eg. billing request A is not paid but bank transfer of billing request B contains the amount of A + B).
+* Changing a plan might require refunding the customer or charging extra.
+* Change billing plan periods
 
 
 
@@ -54,7 +61,11 @@ A sales clerk usually wants to have an overview of
 Dependencies:
 ==========
 vespolina/core
+
 vespolina/product
+
+jms/payment-core-bundle
+
 and maybe product-subscription but for now it's without
 
 
