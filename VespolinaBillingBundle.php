@@ -1,10 +1,10 @@
 <?php
 
-namespace LilaConcepts\Bundle\LilaConceptsBestPracticeBundle;
+namespace Vespolina\BillingBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
-class LilaConceptsBestPracticeBundle extends Bundle
+class VespolinaBillingBundle extends Bundle
 {
 }
 
