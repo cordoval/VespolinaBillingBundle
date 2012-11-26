@@ -27,15 +27,29 @@ Sometimes things get more tricky.  For instance, even if your customer has a sub
 Depending on the use case, he needs to pay it inmediatly (online billing) or have it charged the next time during the billing run.
 
 
-## The billing process
+## The billing process : billing requests and statements
+
+### Generating billing requests
 
 At a predefined time a plan based customer is ought to be billed.  Based on the chosen plan the bundle generates BillingRequest entities.
 Each BillingRequest contains the earliest date the billing can be performed.  A background task looks for billing request which can be billed and executes the actual billing.
 The BillingRequest contains all information needed to fulfill the billing such as the amount, a referencing entity (eg. the customer plan) and the billing party.
 When a billing request is executed with a provider such as Paypal it creates a JMS payment instruction and tries to execute it with Paypal.  If it succeeds the status of the BillingRequest is updated.  When the payment does not succeed a new payment instruction should be created to reprocess the billing.
 
-
 A BillingRequest doesn't need to be online, it might be an e-mail or printed letter requesting the customer to pay.  In such a scenario the bank transfer should contain a reference to the billing request by means of an unique code.
+
+### Generating billing statements
+
+Billing requests are rather technical objects to faciliate tracking of payments.  A billing statement is rather a legal statement such as an invoice which is periodically issued.  The number of billing requests and statements for a given customer do not need to match:  while billing monthly a billing statement could be issued three-monthly which is often the case.
+
+### Monitoring the billing process
+
+A sales clerk usually wants to have an overview of
+* billing requests having an error
+* offline billing requests 
+* the total amount still pending to be billed
+* the total amount overdue
+
 
 ## The model
 
@@ -70,13 +84,6 @@ Optionally:
   * consumption data
   * amount to be charged
 
-## Monitoring the billing process
-
-A sales clerk usually wants to have an overview of
-* billing requests having an error
-* offline billing requests 
-* the total amount still pending to be billed
-* the total amount overdue
 
 Other functionalities this bundle should have
 * Provide means to process bank statement to match open billing requests
