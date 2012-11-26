@@ -37,7 +37,9 @@ When a billing request is executed with a provider such as Paypal it creates a J
 
 A BillingRequest doesn't need to be online, it might be an e-mail or printed letter requesting the customer to pay.  In such a scenario the bank transfer should contain a reference to the billing request by means of an unique code.
 
-### Anatonomy of a plan / subscription
+## The model
+
+### Anatomy of a plan / service
 
 A plan should contain following information relevant for billing:
 * name
@@ -47,7 +49,26 @@ A plan should contain following information relevant for billing:
 * interval amount ( 1-month, 2-months = bi-monthly, 1-year, ...)
 * occurences (how many times the BR should be executed, 0 means infinite)
 
+### Anatomy of a billing request
 
+A billing should contain following information:
+
+* the partner being billed
+* amount
+* planned execution date
+* state of the payment
+* payment gateway (how will it be billed)
+* reference to the service to be paid (if a customer has only one plan at most)
+* consumption data ; A key / value pair containing collected metrics, eg. server traffic volume
+* audit trail ...
+
+Optionally:
+* the partner issuing the bill (handy for organisations with multiple legal organisations (eg. multi-country)
+* billing request items: a collection BillingRequestItemInterface instances which reference individual services and amounts to be billed.
+  A billing request item contains:
+  * reference to the service to be paid
+  * consumption data
+  * amount to be charged
 
 ## Monitoring the billing process
 
