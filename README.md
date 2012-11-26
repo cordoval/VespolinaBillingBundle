@@ -85,7 +85,36 @@ Optionally:
   * amount to be charged
 
 
+### Advanced billing processess
+
+## Changing plans (upgrade / downgrade)
+
+Changing a plan requires adjusting open billing requests.  The administration should choose if the change is performed as Prorated or Non-prorate.
+
+With Prorated the actual consumption of the product is charged (on a day basis).  If a customer is charged for a service $30 in April and he wants to go to a $60 plan on the 10th of April following will be billed:
+day 1->10 :  $30 / 30 days  * 10 days = $10
+day 16->30:  $60 / 30 days  * 20 days = $40
+
+Total: $50 will be charged.  Then open billing request is cancelled and new billing requests are created, for which the first will $50 and others $60.
+With non-Prorated the billing request is cancelled and a new billing request is greated with the new amount.
+
+In both cases the new contract start date of the new plan should be one day after the previous one (trust me on this, it's an accounting nightmare to cope with product changes on the same day).
+
+
+
+## Dunning & legal recovery
+
+When a billing request expires the dunning process kicks in.  Starting with sending notifications with the amount overdue to deactivating the service and persuing legal recovery.
+A simple configuration should be provided to model the dunning process.  Below an example configuration:
+* 0 -> 14d overdue: send every 5 days notification "warning amount overdue"
+* 15 -> 30d overdue: send every 5 days notification "warning amount overdue - less friendly"
+* 31 -> 50d overdue: escalate to legal recovery department
+* 51d overdue: de-activate service
+
+
+
 Other functionalities this bundle should have
+
 * Provide means to process bank statement to match open billing requests
 * Allow the customer to resume a failed payment by sending him an email containing a link to perform online billing.
 * Cope with customers paying multiple billing requests at once (eg. billing request A is not paid but bank transfer of billing request B contains the amount of A + B).
