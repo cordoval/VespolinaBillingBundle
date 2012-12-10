@@ -29,11 +29,29 @@ Depending on the use case, he needs to pay it inmediatly (online billing) or hav
 
 ## The billing process : billing requests and statements
 
-### Generating billing requests
+### What is a billing request?
 
 At a predefined time a plan based customer is ought to be billed.  Based on the chosen plan the bundle generates BillingRequest entities.
 Each BillingRequest contains the earliest date the billing can be performed.  A background task looks for billing request which can be billed and executes the actual billing.
 The BillingRequest contains all information needed to fulfill the billing such as the amount, a referencing entity (eg. the customer plan) and the billing party.
+
+### Choosing a generation strategy: just-in-time or planned
+
+The billing bundle supports two strategies of generating billing requests: **just-in-time** or **planned**.
+With **just-in-time **a background process generates for each customer a single billing request a fixed time before the billing is ought to take place.  Companies billing every month will generate billing requests one week before the billing execution happens.  This allows administration to verify and potentially correct billing requests in a timely matter.
+
+With **planned** a background process generates for each customer billing requests over a longer period of time.  A plan for a year with monthly billing would generate twelve billing requests.
+
+Which approach should be chosen?
+
+Just-in-time should be chosen if the the customer is expected to change often his mind or the expected duration of the subscription is limited.  It reduces the amount of manual (verification) work to cancel or adjust generated billing requests.  The drawback of just-in-time is that it's harder to report expected revenues. 
+
+If customers are expected to have a more long term commitment (eg. server hosting) it might be better to opt for generated billing requests.  As a bonus expected revenues can be easily and more accurately be reported.
+ 
+
+
+### Fulfilling billing requests
+
 When a billing request is executed with a provider such as Paypal it creates a JMS payment instruction and tries to execute it with Paypal.  If it succeeds the status of the BillingRequest is updated.  When the payment does not succeed a new payment instruction should be created to reprocess the billing.
 
 A BillingRequest doesn't need to be online, it might be an e-mail or printed letter requesting the customer to pay.  In such a scenario the bank transfer should contain a reference to the billing request by means of an unique code.
